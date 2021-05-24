@@ -2,11 +2,23 @@ overwrite: true
 schema: 'http://localhost:3000/api/graphql' # GraphQL endpoint
 documents: 'graphql/**/*.graphql.ts' # parse graphql operations in matching files
 generates:
-  generated/graphql.tsx: # location for generated types, hooks and components
+  generated/graphql.tsx:
     plugins:
-      - 'typescript'
-      - 'typescript-operations'
-      - 'typescript-urql'
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
     config:
-      withComponent: false # we'll use Urql client with hooks instead
+      reactApolloVersion: 3
+      withHOC: false
+      withComponent: false
+      exportFragmentSpreadSubTypes: true
+      documentMode: graphQLTag
       withHooks: true
+      apolloClientInstanceImport: './withApollo'
+    presetConfig:
+      typesPath: ./graphql
+    plugins:
+      - "graphql-codegen-apollo-next-ssr"
+hooks:
+  afterAllFileWrite:
+    - prettier --write

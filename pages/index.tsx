@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Layout from '../components/Layout';
 import AllUsers from '../components/AllUsers';
 
-const IndexPage = () => (
+const Index = () => (
   <Layout title="Home | Next.js + TypeScript Example">
     <h1>Hello Next.js 👋</h1>
     <p>
@@ -10,9 +10,7 @@ const IndexPage = () => (
         <a>About</a>
       </Link>
     </p>
-    {/* === Tada! === */}
     <AllUsers />
   </Layout>
 );
-
-export default IndexPage;
+export default Index

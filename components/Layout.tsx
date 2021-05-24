@@ -2,12 +2,10 @@ import React, { ReactNode } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 
-type Props = {
+const Layout = ({ children, title = 'This is the default title' }: {
   children?: ReactNode;
   title?: string;
-};
-
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
+}) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -37,5 +35,4 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
     </footer>
   </div>
 );
-
-export default Layout;
+export default Layout

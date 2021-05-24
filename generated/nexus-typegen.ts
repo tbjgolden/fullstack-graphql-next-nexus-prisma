@@ -3,7 +3,7 @@
  * Do not make changes to this file directly
  */
 
-import * as Context from "../graphql/context"
+import * as Context from "./../graphql/context"
 
 
 
@@ -63,10 +63,10 @@ export interface NexusGenInputs {
   }
   UserWhereInput: { // input type
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
-    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
     NOT?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     OR?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
   UserWhereUniqueInput: { // input type
     id?: string | null; // String
@@ -85,8 +85,8 @@ export interface NexusGenScalars {
   ID: string
 }
 
-export interface NexusGenRootTypes {
-  BatchPayload: { // root type
+export interface NexusGenObjects {
+  AffectedRowsOutput: { // root type
     count: number; // Int!
   }
   Mutation: {};
@@ -97,33 +97,26 @@ export interface NexusGenRootTypes {
   }
 }
 
-export interface NexusGenAllTypes extends NexusGenRootTypes {
-  NestedStringFilter: NexusGenInputs['NestedStringFilter'];
-  StringFieldUpdateOperationsInput: NexusGenInputs['StringFieldUpdateOperationsInput'];
-  StringFilter: NexusGenInputs['StringFilter'];
-  UserCreateInput: NexusGenInputs['UserCreateInput'];
-  UserUpdateInput: NexusGenInputs['UserUpdateInput'];
-  UserUpdateManyMutationInput: NexusGenInputs['UserUpdateManyMutationInput'];
-  UserWhereInput: NexusGenInputs['UserWhereInput'];
-  UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
-  QueryMode: NexusGenEnums['QueryMode'];
-  String: NexusGenScalars['String'];
-  Int: NexusGenScalars['Int'];
-  Float: NexusGenScalars['Float'];
-  Boolean: NexusGenScalars['Boolean'];
-  ID: NexusGenScalars['ID'];
+export interface NexusGenInterfaces {
 }
 
+export interface NexusGenUnions {
+}
+
+export type NexusGenRootTypes = NexusGenObjects
+
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
+
 export interface NexusGenFieldTypes {
-  BatchPayload: { // field return type
+  AffectedRowsOutput: { // field return type
     count: number; // Int!
   }
   Mutation: { // field return type
     bigRedButton: string | null; // String
     createOneUser: NexusGenRootTypes['User']; // User!
-    deleteManyUser: NexusGenRootTypes['BatchPayload']; // BatchPayload!
+    deleteManyUser: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     deleteOneUser: NexusGenRootTypes['User'] | null; // User
-    updateManyUser: NexusGenRootTypes['BatchPayload']; // BatchPayload!
+    updateManyUser: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     updateOneUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
@@ -138,15 +131,15 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
-  BatchPayload: { // field return type name
+  AffectedRowsOutput: { // field return type name
     count: 'Int'
   }
   Mutation: { // field return type name
     bigRedButton: 'String'
     createOneUser: 'User'
-    deleteManyUser: 'BatchPayload'
+    deleteManyUser: 'AffectedRowsOutput'
     deleteOneUser: 'User'
-    updateManyUser: 'BatchPayload'
+    updateManyUser: 'AffectedRowsOutput'
     updateOneUser: 'User'
   }
   Query: { // field return type name
@@ -193,22 +186,35 @@ export interface NexusGenArgTypes {
   }
 }
 
-export interface NexusGenAbstractResolveReturnTypes {
+export interface NexusGenAbstractTypeMembers {
 }
 
-export interface NexusGenInheritedFields {}
+export interface NexusGenTypeInterfaces {
+}
 
-export type NexusGenObjectNames = "BatchPayload" | "Mutation" | "Query" | "User";
+export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = "NestedStringFilter" | "StringFieldUpdateOperationsInput" | "StringFilter" | "UserCreateInput" | "UserUpdateInput" | "UserUpdateManyMutationInput" | "UserWhereInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = keyof NexusGenInputs;
 
-export type NexusGenEnumNames = "QueryMode";
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = keyof NexusGenScalars;
 
 export type NexusGenUnionNames = never;
+
+export type NexusGenObjectsUsingAbstractStrategyIsTypeOf = never;
+
+export type NexusGenAbstractsUsingStrategyResolveType = never;
+
+export type NexusGenFeaturesConfig = {
+  abstractTypeStrategies: {
+    isTypeOf: false
+    resolveType: true
+    __typename: false
+  }
+}
 
 export interface NexusGenTypes {
   context: Context.Context;
@@ -218,7 +224,7 @@ export interface NexusGenTypes {
   fieldTypes: NexusGenFieldTypes;
   fieldTypeNames: NexusGenFieldTypeNames;
   allTypes: NexusGenAllTypes;
-  inheritedFields: NexusGenInheritedFields;
+  typeInterfaces: NexusGenTypeInterfaces;
   objectNames: NexusGenObjectNames;
   inputNames: NexusGenInputNames;
   enumNames: NexusGenEnumNames;
@@ -229,7 +235,10 @@ export interface NexusGenTypes {
   allOutputTypes: NexusGenTypes['objectNames'] | NexusGenTypes['enumNames'] | NexusGenTypes['unionNames'] | NexusGenTypes['interfaceNames'] | NexusGenTypes['scalarNames'];
   allNamedTypes: NexusGenTypes['allInputTypes'] | NexusGenTypes['allOutputTypes']
   abstractTypes: NexusGenTypes['interfaceNames'] | NexusGenTypes['unionNames'];
-  abstractResolveReturn: NexusGenAbstractResolveReturnTypes;
+  abstractTypeMembers: NexusGenAbstractTypeMembers;
+  objectsUsingAbstractStrategyIsTypeOf: NexusGenObjectsUsingAbstractStrategyIsTypeOf;
+  abstractsUsingStrategyResolveType: NexusGenAbstractsUsingStrategyResolveType;
+  features: NexusGenFeaturesConfig;
 }
 
 
@@ -237,7 +246,71 @@ declare global {
   interface NexusGenPluginTypeConfig<TypeName extends string> {
   }
   interface NexusGenPluginFieldConfig<TypeName extends string, FieldName extends string> {
+    /**
+     * Whether the type can be null
+     * @default (depends on whether nullability is configured in type or schema)
+     * @see declarativeWrappingPlugin
+     */
+    nullable?: boolean
+    /**
+     * Whether the type is list of values, or just a single value.
+     * If list is true, we assume the type is a list. If list is an array,
+     * we'll assume that it's a list with the depth. The boolean indicates whether
+     * the type is required (non-null), where true = nonNull, false = nullable.
+     * @see declarativeWrappingPlugin
+     */
+    list?: true | boolean[]
+    /**
+     * Whether the type should be non null, `required: true` = `nullable: false`
+     * @default (depends on whether nullability is configured in type or schema)
+     * @see declarativeWrappingPlugin
+     */
+    required?: boolean
+  }
+  interface NexusGenPluginInputFieldConfig<TypeName extends string, FieldName extends string> {
+    /**
+     * Whether the type can be null
+     * @default (depends on whether nullability is configured in type or schema)
+     * @see declarativeWrappingPlugin
+     */
+    nullable?: boolean
+    /**
+     * Whether the type is list of values, or just a single value.
+     * If list is true, we assume the type is a list. If list is an array,
+     * we'll assume that it's a list with the depth. The boolean indicates whether
+     * the type is required (non-null), where true = nonNull, false = nullable.
+     * @see declarativeWrappingPlugin
+     */
+    list?: true | boolean[]
+    /**
+     * Whether the type should be non null, `required: true` = `nullable: false`
+     * @default (depends on whether nullability is configured in type or schema)
+     * @see declarativeWrappingPlugin
+     */
+    required?: boolean
   }
   interface NexusGenPluginSchemaConfig {
+  }
+  interface NexusGenPluginArgConfig {
+    /**
+     * Whether the type can be null
+     * @default (depends on whether nullability is configured in type or schema)
+     * @see declarativeWrappingPlugin
+     */
+    nullable?: boolean
+    /**
+     * Whether the type is list of values, or just a single value.
+     * If list is true, we assume the type is a list. If list is an array,
+     * we'll assume that it's a list with the depth. The boolean indicates whether
+     * the type is required (non-null), where true = nonNull, false = nullable.
+     * @see declarativeWrappingPlugin
+     */
+    list?: true | boolean[]
+    /**
+     * Whether the type should be non null, `required: true` = `nullable: false`
+     * @default (depends on whether nullability is configured in type or schema)
+     * @see declarativeWrappingPlugin
+     */
+    required?: boolean
   }
 }

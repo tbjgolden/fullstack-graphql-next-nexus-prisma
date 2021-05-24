@@ -1,16 +1,11 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 
-import { User } from '../../interfaces';
+import { User } from '../../generated/graphql';
 import { sampleUserData } from '../../utils/sample-data';
 import Layout from '../../components/Layout';
 import ListDetail from '../../components/ListDetail';
 
-type Props = {
-  item?: User;
-  errors?: string;
-};
-
-const StaticPropsDetail = ({ item, errors }: Props) => {
+const UsersId = ({ item, errors }: { item?: User; errors?: string }) => {
   if (errors) {
     return (
       <Layout title="Error | Next.js + TypeScript Example">
@@ -19,20 +14,19 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
         </p>
       </Layout>
     );
+  } else {
+    return (
+      <Layout
+        title={`${
+          item ? item.name : 'User Detail'
+        } | Next.js + TypeScript Example`}
+      >
+        {item && <ListDetail item={item} />}
+      </Layout>
+    );
   }
-
-  return (
-    <Layout
-      title={`${
-        item ? item.name : 'User Detail'
-      } | Next.js + TypeScript Example`}
-    >
-      {item && <ListDetail item={item} />}
-    </Layout>
-  );
 };
-
-export default StaticPropsDetail;
+export default UsersId
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get the paths we want to pre-render based on users

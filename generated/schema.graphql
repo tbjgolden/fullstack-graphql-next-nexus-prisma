@@ -2,16 +2,16 @@
 ### Do not make changes to this file directly
 
 
-type BatchPayload {
+type AffectedRowsOutput {
   count: Int!
 }
 
 type Mutation {
   bigRedButton: String
   createOneUser(data: UserCreateInput!): User!
-  deleteManyUser(where: UserWhereInput): BatchPayload!
+  deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
   deleteOneUser(where: UserWhereUniqueInput!): User
-  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
 }
 
@@ -81,10 +81,10 @@ input UserUpdateManyMutationInput {
 
 input UserWhereInput {
   AND: [UserWhereInput!]
-  id: StringFilter
-  name: StringFilter
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
+  id: StringFilter
+  name: StringFilter
 }
 
 input UserWhereUniqueInput {
