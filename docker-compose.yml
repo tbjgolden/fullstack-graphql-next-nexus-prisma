@@ -21,3 +21,6 @@ services:
 
 # enter postgres interpreter:
 # psql --username=usrnm --dbname=demo --host=db
+
+# add .env file
+# DATABASE_URL="postgresql://usrnm:passwd@localhost:54320/demo"

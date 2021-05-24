@@ -5,6 +5,7 @@
     "dev": "concurrently -r \"npx next\" \"npx graphql-codegen --watch\"",
     "build": "next build",
     "start": "next start",
+    "migrate": "prisma migrate dev",
     "type-check": "tsc"
   },
   "dependencies": {
