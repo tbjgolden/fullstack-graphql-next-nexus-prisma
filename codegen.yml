@@ -11,14 +11,7 @@ generates:
       reactApolloVersion: 3
       withHOC: false
       withComponent: false
-      exportFragmentSpreadSubTypes: true
-      documentMode: graphQLTag
       withHooks: true
-      apolloClientInstanceImport: './withApollo'
-    presetConfig:
-      typesPath: ./graphql
-    plugins:
-      - "graphql-codegen-apollo-next-ssr"
 hooks:
   afterAllFileWrite:
     - prettier --write

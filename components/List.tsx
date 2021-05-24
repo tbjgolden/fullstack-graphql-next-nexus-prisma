@@ -1,14 +1,14 @@
 import * as React from 'react';
 import ListItem from './ListItem';
-import { User } from '../interfaces';
+import { User } from '../generated/graphql';
 
-const List = ({ items }: {
-  items: User[];
+const List = ({ users }: {
+  users: User[];
 }) => (
   <ul>
-    {items.map(item => (
-      <li key={item.id}>
-        <ListItem data={item} />
+    {users.map(user => (
+      <li key={user.id}>
+        <ListItem data={user} />
       </li>
     ))}
   </ul>

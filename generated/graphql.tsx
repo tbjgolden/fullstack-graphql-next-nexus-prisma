@@ -1,9 +1,14 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions = {};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -28,27 +33,22 @@ export type Mutation = {
   updateManyUser: AffectedRowsOutput;
 };
 
-
 export type MutationCreateOneUserArgs = {
   data: UserCreateInput;
 };
-
 
 export type MutationDeleteOneUserArgs = {
   where: UserWhereUniqueInput;
 };
 
-
 export type MutationDeleteManyUserArgs = {
   where?: Maybe<UserWhereInput>;
 };
-
 
 export type MutationUpdateOneUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
 };
-
 
 export type MutationUpdateManyUserArgs = {
   data: UserUpdateManyMutationInput;
@@ -76,11 +76,9 @@ export type Query = {
   users: Array<User>;
 };
 
-
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
 };
-
 
 export type QueryUsersArgs = {
   first?: Maybe<Scalars['Int']>;
@@ -146,24 +144,64 @@ export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
-export type AllUsersQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllUsersQueryVariables = Exact<{ [key: string]: never }>;
 
-
-export type AllUsersQuery = (
-  { __typename?: 'Query' }
-  & { allUsers?: Maybe<Array<Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'name'>
-  )>>> }
-);
-
+export type AllUsersQuery = { __typename?: 'Query' } & {
+  allUsers?: Maybe<
+    Array<Maybe<{ __typename?: 'User' } & Pick<User, 'id' | 'name'>>>
+  >;
+};
 
 export const AllUsersDocument = gql`
-    query AllUsers {
-  allUsers {
-    id
-    name
+  query AllUsers {
+    allUsers {
+      id
+      name
+    }
   }
+`;
+
+/**
+ * __useAllUsersQuery__
+ *
+ * To run a query within a React component, call `useAllUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllUsersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllUsersQuery(
+  baseOptions?: Apollo.QueryHookOptions<AllUsersQuery, AllUsersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<AllUsersQuery, AllUsersQueryVariables>(
+    AllUsersDocument,
+    options
+  );
 }
-    `;
-export type AllUsersQueryResult = Apollo.QueryResult<AllUsersQuery, AllUsersQueryVariables>;
+export function useAllUsersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    AllUsersQuery,
+    AllUsersQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<AllUsersQuery, AllUsersQueryVariables>(
+    AllUsersDocument,
+    options
+  );
+}
+export type AllUsersQueryHookResult = ReturnType<typeof useAllUsersQuery>;
+export type AllUsersLazyQueryHookResult = ReturnType<
+  typeof useAllUsersLazyQuery
+>;
+export type AllUsersQueryResult = Apollo.QueryResult<
+  AllUsersQuery,
+  AllUsersQueryVariables
+>;

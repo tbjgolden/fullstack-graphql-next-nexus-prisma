@@ -2,7 +2,7 @@ import React from 'react';
 import { useAllUsersQuery } from '../generated/graphql';
 
 const AllUsers = () => {
-  const [{ data, fetching, error }] = useAllUsersQuery();
+  const { data, fetching, error } = useAllUsersQuery();
 
   if (fetching) {
     return <p>Loading...</p>;

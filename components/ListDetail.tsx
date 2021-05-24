@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { User } from '../generated/graphql';
 
-const ListDetail = ({ item: user }: {
-  item: User;
+const ListDetail = ({ user }: {
+  user: User;
 }) => (
   <div>
     <h1>Detail for {user.name}</h1>
