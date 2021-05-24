@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  db:
+    image: "postgres:12"
+    ports:
+      - "54320:5432"
+    volumes: 
+      - ./pgdata:/var/lib/postgresql/data
+    environment: 
+      - POSTGRES_USER=usrnm
+      - POSTGRES_PASSWORD=passwd
+      - POSTGRES_DB=demo
+
+# change vars
+
+# rebuild with:
+# docker-compose up --build --force-recreate -d
+
+# enter container:
+# docker-compose run db bash
+
+# enter postgres interpreter:
+# psql --username=usrnm --dbname=demo --host=db
